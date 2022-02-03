@@ -24,6 +24,17 @@ class Recipe:
         return response_query
     
     @classmethod
+    def get_all_recipes(cls):
+        query = '''
+                SELECT * FROM recipes
+                '''
+        response_query_recipes=connectToMySQL(DB_NAME).query_db(query)
+        recipes = []
+        for recipe in response_query_recipes:
+            recipes.append(cls(recipe))
+        return recipes
+
+    @classmethod
     def get_all_recipes_by_id(cls,data):
         query = '''
                 SELECT recipes.id,recipes.name,recipes.description,recipes.instruction,recipes.under_30_minutes,recipes.created_at,recipes.updated_at,recipes.user_id FROM users

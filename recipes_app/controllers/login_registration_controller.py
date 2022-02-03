@@ -45,7 +45,9 @@ def dashboard_user():
         'id': session['id']
     }
     response_query=User.get_user_by_id(data)
-    response_query_recipes = Recipe.get_all_recipes_by_id(data)
+    # response_query_recipes = Recipe.get_all_recipes_by_id(data)
+    response_query_recipes = Recipe.get_all_recipes()
+    print(response_query_recipes)
     return render_template("dashboard.html",user=response_query,recipes=response_query_recipes)
 
 @app.route("/logout",methods=['GET'])
